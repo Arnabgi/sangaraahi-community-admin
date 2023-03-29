@@ -1,0 +1,19 @@
+<mat-card-content>
+    <form [formGroup]="otpForm" (ngSubmit)="submit()" autocomplete="off" (keydown.enter)="$event.preventDefault()">
+        <div class="mat-title"><h3>Please Enter your OTP</h3></div>
+        <div class="mat_form_row">
+        <mat-form-field  appearance="fill" class="example-full-width">
+            <mat-label>OTP:</mat-label>
+            <input matInput type="number" formControlName="otp" (keypress)="numericOnly($event)" (keydown.space)="$event.preventDefault()">
+            <mat-error *ngIf="otpForm.get('otp')!.hasError('required')"> OTP is Required </mat-error>
+            <mat-error *ngIf="otpForm.get('otp')!.hasError('min')"> OTP must be contain 6 digits</mat-error>
+            <mat-error *ngIf="otpForm.get('otp')!.hasError('max')"> OTP must be contain 6 digits</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="mat_form_button_sec">
+        <button class="formBtn_layout" mat-raised-button color="accent" type="submit" [disabled]="!otpForm.valid">Send OTP</button>
+        &nbsp;
+        <button mat-raised-button color="basic">Resend OTP</button>
+    </div>
+    </form>
+</mat-card-content>
