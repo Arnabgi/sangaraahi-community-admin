@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VerifyOtpComponent } from './components/verify-otp/verify-otp.component';
 
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -15,6 +16,9 @@ import { VerifyOtpComponent } from './components/verify-otp/verify-otp.component
     CommonModule,
     AuthRoutingModule,
     SharedModule
+  ],
+  providers: [
+
   ]
 })
 export class AuthModule { }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validation } from 'src/app/shared/validator/validation';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-verify-otp',
@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class VerifyOtpComponent implements OnInit{
   otpForm!: FormGroup;
+  siteKey:string =environment.siteKey;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -23,8 +24,9 @@ export class VerifyOtpComponent implements OnInit{
 
   init(){
     this.otpForm = new FormGroup({
-      otp: new FormControl(null, [Validators.required,Validators.min(100000),Validators.max(999999)])
-    })
+      otp: new FormControl(null, [Validators.required,Validators.min(100000),Validators.max(999999)]),
+      recaptcha: new FormControl(null,[Validators.required])
+    });
   }
 
   numericOnly(event: { which: any; keyCode: any; }): boolean {

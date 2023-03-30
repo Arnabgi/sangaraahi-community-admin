@@ -1,4 +1,5 @@
 <mat-card-content>
+    <div style="padding-top: 100px;">
     <form [formGroup]="otpForm" (ngSubmit)="submit()" autocomplete="off" (keydown.enter)="$event.preventDefault()">
         <div class="mat-title"><h3>Please Enter your OTP</h3></div>
         <div class="mat_form_row">
@@ -10,10 +11,17 @@
             <mat-error *ngIf="otpForm.get('otp')!.hasError('max')"> OTP must be contain 6 digits</mat-error>
         </mat-form-field>
     </div>
+    <div class="mat_form_row" style="padding-left: 700px;">
+        <ngx-recaptcha2
+            [siteKey]="siteKey"
+            formControlName="recaptcha">
+        </ngx-recaptcha2>
+    </div><br/>
     <div class="mat_form_button_sec">
-        <button class="formBtn_layout" mat-raised-button color="accent" type="submit" [disabled]="!otpForm.valid">Send OTP</button>
+        <button class="formBtn_layout" mat-raised-button color="accent" type="submit" [disabled]="!otpForm.valid">Continue</button>
         &nbsp;
         <button mat-raised-button color="basic">Resend OTP</button>
     </div>
     </form>
+</div>
 </mat-card-content>

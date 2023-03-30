@@ -1,41 +1,43 @@
 <mat-card-content>
-    <form [formGroup]="loginForm" (ngSubmit)="submit()" autocomplete="off" (keydown.enter)="$event.preventDefault()">
-        <div class="mat-title"><h1>Sign In</h1></div>
-        <div class="mat_form_row">
-            <mat-form-field  appearance="fill" class="example-full-width">
-                <mat-label>Country Code</mat-label>
-                <input type="text"
-                    placeholder="Pick one"
-                    aria-label="Number"
-                    matInput
-                    formControlName="countryCode"
-                    [matAutocomplete]="auto"
-                    >
-                <mat-autocomplete #auto="matAutocomplete">
-                <mat-option value="+91">
-                    India
-                </mat-option>
-                </mat-autocomplete>
-                <mat-error *ngIf="loginForm.get('countryCode')!.hasError('required')">
-                    Country code is required
-                </mat-error>
-                <mat-error *ngIf="loginForm.get('countryCode')!.hasError('cannotContainSpace')">
-                    Country code can not contain whitespace
-                </mat-error>
-            </mat-form-field>
-        </div>
+    <div style="padding-top: 100px;">
+        <form [formGroup]="loginForm" (ngSubmit)="submit()" autocomplete="off" (keydown.enter)="$event.preventDefault()">
+            <div class="mat-title"><h1>Sign In</h1></div>
+            <div class="mat_form_row">
+                <mat-form-field  appearance="fill" class="example-full-width">
+                    <mat-label>Country Code</mat-label>
+                    <input type="text"
+                        placeholder="Pick one"
+                        aria-label="Number"
+                        matInput
+                        formControlName="countryCode"
+                        [matAutocomplete]="auto"
+                        >
+                    <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option value="+91">
+                        India
+                    </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="loginForm.get('countryCode')!.hasError('required')">
+                        Country code is required
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('countryCode')!.hasError('cannotContainSpace')">
+                        Country code can not contain whitespace
+                    </mat-error>
+                </mat-form-field>
+            </div>
 
-        <div class="mat_form_row">
-            <mat-form-field class="example-full-width">
-                <mat-label> Phone: </mat-label>
-                <input matInput type="number" formControlName="phone" (keypress)="numericOnly($event)" (keydown.space)="$event.preventDefault()">
-                <mat-error *ngIf="loginForm.get('phone')!.hasError('required')"> Valid phone is Required </mat-error>
-                <mat-error *ngIf="loginForm.get('phone')!.hasError('min')"> Phone No. must be contain more than 7 digit</mat-error>
-                <mat-error *ngIf="loginForm.get('phone')!.hasError('max')"> Phone No. must be contain less than 13 digit </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="mat_form_button_sec">
-            <button class="formBtn_layout" mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid">Send OTP</button>
-        </div>
-    </form>
+            <div class="mat_form_row">
+                <mat-form-field class="example-full-width">
+                    <mat-label> Phone: </mat-label>
+                    <input matInput type="number" formControlName="phone" (keypress)="numericOnly($event)" (keydown.space)="$event.preventDefault()">
+                    <mat-error *ngIf="loginForm.get('phone')!.hasError('required')"> Valid phone is Required </mat-error>
+                    <mat-error *ngIf="loginForm.get('phone')!.hasError('min')"> Phone No. must be contain more than 7 digit</mat-error>
+                    <mat-error *ngIf="loginForm.get('phone')!.hasError('max')"> Phone No. must be contain less than 13 digit </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="mat_form_button_sec">
+                <button class="formBtn_layout" mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid">Send OTP</button>
+            </div>
+        </form>
+    </div>
 </mat-card-content>
