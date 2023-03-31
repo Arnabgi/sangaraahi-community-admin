@@ -11,10 +11,11 @@
                         matInput
                         formControlName="countryCode"
                         [matAutocomplete]="auto"
+                        (keyup)="searchCountry($event)"
                         >
                     <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option value="+91">
-                        India
+                    <mat-option *ngFor="let country of filteredOptions" [value]="country.dialCode" (click)="addCountryCode(country)">
+                        {{country.name}} - [{{country.dialCode}}]
                     </mat-option>
                     </mat-autocomplete>
                     <mat-error *ngIf="loginForm.get('countryCode')!.hasError('required')">
@@ -25,7 +26,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
+            <br/>
             <div class="mat_form_row">
                 <mat-form-field class="example-full-width">
                     <mat-label> Phone: </mat-label>

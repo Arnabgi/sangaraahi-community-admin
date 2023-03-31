@@ -3,6 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { validation } from 'src/app/shared/validator/validation';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { LoaderService } from 'src/app/shared/services/loader.service';
+import { ApolloClientService } from 'src/app/shared/services/apollo-client.service';
+import { AlertService } from 'src/app/shared/services/alert.service';
+import { GeneralResponse } from 'src/app/shared/interfaces/general-response.ineterface';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-verify-otp',
@@ -13,6 +18,10 @@ export class VerifyOtpComponent implements OnInit{
   otpForm!: FormGroup;
   siteKey:string =environment.siteKey;
   constructor(
+    private loaderService: LoaderService,
+    private apolloClient: ApolloClientService,
+    private alertService: AlertService,
+    private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ){
@@ -38,7 +47,48 @@ export class VerifyOtpComponent implements OnInit{
   }
 
   submit(){
+    let otp = this.otpForm.controls['otp'].value;
+    const data = {
+      "data": {
+        otp : otp
+      }
+    }
+    this.loaderService.show();
+    this.apolloClient.setModule("verifyOtp").mutateData(data).subscribe((response:GeneralResponse) => {
+      this.loaderService.hide();
+      if(response.error) {
+        console.log("error......",response);
+        if(response.code === 400) {
+          // Sow toaster
+          this.alertService.error(response.message);
+        }else{
+          this.alertService.error("Timed out.");
+          //this.router.navigateByUrl('auth/forget-password');
+        }
+      } else {
+        // Redirect to the password change page.
+        this.router.navigateByUrl('dashboard');
+      }
+  });
+}
 
-  }
+otpResend() {
+  this.authService.resendOtpRefreshToken();
+  // this.loaderService.show();
+  // this.apolloClient.setModule("resendOtp").mutateData('').subscribe((response:GeneralResponse) => {
+  //   this.loaderService.hide();
+  //   if(response.error) {
+  //     console.log("response......",response);
+  //     if(response.code === 401) {
+  //       this.alertService.error("Timed out.");
+  //       // this.router.navigateByUrl('auth/forget-password');
+  //     }else{
+  //       this.alertService.error(response.message);
+  //     }
+  //   } else {
+  //     this.alertService.success(response.message);
+  //   }
+  // });
+}
 
 }

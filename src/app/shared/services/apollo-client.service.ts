@@ -100,7 +100,7 @@ export class ApolloClientService {
         this.storage.removeLocalItem('authToken');
         this.storage.removeLocalItem('userData');
         this.storage.removeLocalItem('refreshToken');
-        this.router.navigateByUrl('/auth');
+        this.router.navigateByUrl('/login');
       }
     });
   }

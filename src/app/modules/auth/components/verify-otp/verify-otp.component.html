@@ -11,7 +11,7 @@
             <mat-error *ngIf="otpForm.get('otp')!.hasError('max')"> OTP must be contain 6 digits</mat-error>
         </mat-form-field>
     </div>
-    <div class="mat_form_row" style="padding-left: 700px;">
+    <div class="mat_form_row" style="padding-left: 500px;">
         <ngx-recaptcha2
             [siteKey]="siteKey"
             formControlName="recaptcha">
@@ -19,9 +19,8 @@
     </div><br/>
     <div class="mat_form_button_sec">
         <button class="formBtn_layout" mat-raised-button color="accent" type="submit" [disabled]="!otpForm.valid">Continue</button>
-        &nbsp;
-        <button mat-raised-button color="basic">Resend OTP</button>
     </div>
     </form>
+        <button mat-raised-button color="basic" (click)="otpResend()">Resend OTP</button>
 </div>
 </mat-card-content>
