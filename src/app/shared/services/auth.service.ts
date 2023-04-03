@@ -21,7 +21,8 @@ export class AuthService {
   ) { }
 
   isLogin() {
-    return this.storage.hasLocalItem('authToken') && this.storage.hasLocalItem('userData');
+    //return this.storage.hasLocalItem('authToken') && this.storage.hasLocalItem('userData');
+    return this.storage.hasLocalItem('authToken');
   }
 
   login(phone:any, countryCode:any, phoneCode: any) {
@@ -37,7 +38,7 @@ export class AuthService {
       .subscribe((response:GeneralResponse) => {
         this.loader.hide();
         if(response.error) {
-          console.log("error.....",response.error);
+          //console.log("error.....",response.error);
           // Sow toaster
           this.alertService.error(response.message);
         } else {
@@ -65,7 +66,7 @@ export class AuthService {
         // Sow toaster
         this.alertService.error(response.message);
       } else {
-        // this.alertService.success(response.message);
+        this.alertService.success(response.message);
         // Redirect to the auth.
         this.storage.removeLocalItem('authToken');
         this.storage.removeLocalItem('userData');

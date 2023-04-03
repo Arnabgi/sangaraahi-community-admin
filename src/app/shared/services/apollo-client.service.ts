@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { catchError, Observable } from 'rxjs';
 import { map } from 'rxjs';
 import {GraphQLRequests} from '../typedefs/grapgql-request.types';
-import { query_modules } from '../queries/apollo.queries';
+import { query_modules } from '../queries/auth-apollo.queries';
 import { ModuleKeyType } from '../interfaces/module-key-type.interface';
 import { GeneralResponse } from '../interfaces/general-response.ineterface';
 import {AuthService} from "./auth.service";

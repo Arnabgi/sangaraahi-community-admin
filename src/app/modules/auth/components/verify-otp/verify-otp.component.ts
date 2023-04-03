@@ -56,8 +56,8 @@ export class VerifyOtpComponent implements OnInit{
     this.loaderService.show();
     this.apolloClient.setModule("verifyOtp").mutateData(data).subscribe((response:GeneralResponse) => {
       this.loaderService.hide();
+      console.log("error......",response.error);
       if(response.error) {
-        console.log("error......",response);
         if(response.code === 400) {
           // Sow toaster
           this.alertService.error(response.message);
@@ -67,7 +67,7 @@ export class VerifyOtpComponent implements OnInit{
         }
       } else {
         // Redirect to the password change page.
-        this.router.navigateByUrl('dashboard');
+        this.router.navigateByUrl('/dashboard');
       }
   });
 }

@@ -8,9 +8,10 @@ import { SharedModule } from './shared/shared.module';
 //import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

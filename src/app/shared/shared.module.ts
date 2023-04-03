@@ -9,6 +9,7 @@ import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { LoaderComponent } from './components/loader/loader.component';
 
+
 @NgModule({
   declarations: [
     LoaderComponent
